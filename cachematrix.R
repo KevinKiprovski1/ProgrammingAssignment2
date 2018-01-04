@@ -6,14 +6,14 @@
 ## cacheSolved is used to access the data in the makeCacheData object
 
 makeCacheMatrix <- function(x = matrix()) {
-  inve = NULL 
+  inv = NULL 
   set <- function(y){
     x <<- y 
-    inve = NULL
+    inv = NULL
   }
   get <- function() x 
-  setinverse <- function(inverse) inve <<- inverse
-  getinverse <- function() inve
+  setinverse <- function(inverse) inv <<- inverse
+  getinverse <- function() inv
   
   list(set = set, get = get, 
        setinverse = setinverse,
@@ -25,12 +25,12 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
  inv <- x$getinverse()
- if (!is.null(inve)){
+ if (!is.null(inv)){
    message("Getting cached data")
-   return(inve)
+   return(inv)
  }
  data <- x$get()
  inve <- solve(data)
- x$setinverse(inve)
- inve
+ x$setinverse(inv)
+ inv
 }
